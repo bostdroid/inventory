@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.activedge.atm.balance.persistence;
+package com.activedge.atm.replenishment.persistence;
 
 import com.activedge.atm.balance.data.BalanceData;
+import com.activedge.atm.replenishment.data.ReplenishmentData;
 import com.activedge.atm.web.common.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,19 +21,18 @@ import java.util.logging.Logger;
  *
  * @author postgres
  */
-public class BalanceDAO extends BaseDAO {
+public class ReplenishmentDAO extends BaseDAO {
  
-    
 /**
  * finds all balances by criteria
  */    
-public List findBalancesByCriteria(BalanceData searchCriteria) throws SQLException {
-        List balances = new ArrayList();
+public List findReplenishmentsByCriteria(ReplenishmentData searchCriteria) throws SQLException {
+        List replenishments = new ArrayList();
          
-     // String sql = "select a.*, b.name from am_acquisition a, am_asset b ";
-     //String sql = "select a.* , b.name from  am_acquisition a, am_asset b  where a.asset_id = b.id";
+    
      String sql = "SELECT * FROM EJ_INVENTORY ";
-      System.out.println("EJ-Date "+searchCriteria.getTranDate());
+     
+     System.out.println("EJ-Date "+searchCriteria.getTranDate());
      String querydate = searchCriteria.getTranDate();
      String newdate = "";
      if (querydate != null & querydate.length() > 9){
@@ -139,21 +139,21 @@ public List findBalancesByCriteria(BalanceData searchCriteria) throws SQLExcepti
             while (rs.next())
             {
                 
-                BalanceData balance = new BalanceData();
-                balance.setId(rs.getLong("id"));
-                balance.setTerminalId(rs.getString("TERMINAL_ID"));
-                System.out.println("terminal "+balance.getTerminalId());
-                balance.setInvOrigin(rs.getString("INV_ORIGIN"));
-                balance.setTranDate(rs.getString("TRAN_DT"));
-                balance.setPreCount1(rs.getString("PRE_COUNT_1"));
-                balance.setPostCount1(rs.getString("POST-COUNT_1"));
-                balance.setPostDenom1(rs.getString("POST_DENOM_1"));
-                balance.setInventoryRef(rs.getString("INVENTORY_REF"));
-                balance.setStatus(rs.getString("STATUS"));
+                ReplenishmentData replenishment = new ReplenishmentData();
+                replenishment.setId(rs.getLong("id"));
+                replenishment.setTerminalId(rs.getString("TERMINAL_ID"));
+                System.out.println("terminal "+replenishment.getTerminalId());
+                replenishment.setInvOrigin(rs.getString("INV_ORIGIN"));
+                replenishment.setTranDate(rs.getString("TRAN_DT"));
+                replenishment.setPreCount1(rs.getString("PRE_COUNT_1"));
+                replenishment.setPostCount1(rs.getString("POST-COUNT_1"));
+                replenishment.setPostDenom1(rs.getString("POST_DENOM_1"));
+                replenishment.setInventoryRef(rs.getString("INVENTORY_REF"));
+                replenishment.setStatus(rs.getString("STATUS"));
  
-               balances.add(balance);
+               replenishments.add(replenishment);
             }
-                System.out.println("total balance "+balances.size());
+                System.out.println("total balance "+replenishments.size());
 
             rs.close();
             stmt.close();
@@ -178,6 +178,6 @@ public List findBalancesByCriteria(BalanceData searchCriteria) throws SQLExcepti
              Logger.getLogger(BaseDAO.class.getName()).log(Level.SEVERE, null, ex);
          }
      }
-     return balances;
+     return replenishments;
     } 
 }
