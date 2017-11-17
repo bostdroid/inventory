@@ -1,9 +1,9 @@
 <%-- 
-    Document   : report
-    Created on : Sep 20, 2017, 12:02:00 PM
-    Author     : bost
+    Document   : replenishmentinput
+    Created on : Nov 17, 2017, 6:06:06 PM
+    Author     : postgres
 --%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -195,16 +195,13 @@
                                                         <th>Unload Count</th>
                                                         <th>Load Count</th>
                                                         <th>Denomination</th>
-                                                        <th>Balance</th>
-                                                        <th>Authorized Amount</th>
-                                                        <th>calculated Balance</th>
                                                         <th>Reference</th>
                                                         <th>Status</th>
                                                                                                     
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <s:iterator value="balances">                      
+                                                    <s:iterator value="replenishments">                      
                                                         <tr>
                                                             <td class="center">
                                                                 <label class="pos-rel"><input type="checkbox" class="ace" /><span class="lbl"></span></label>
@@ -252,15 +249,7 @@
                                                             <td class="hidden-480">
                                                                 <s:property value="postDenom1"/>
                                                             </td>  
-                                                            <td class="hidden-480">
-                                                                <s:property value="balance"/>
-                                                            </td>
-                                                            <td class="hidden-480">
-                                                                <s:property value="authorizedAmount"/>
-                                                            </td>
-                                                            <td class="hidden-480">
-                                                                <s:property value="calculatedBalance"/>
-                                                            </td>
+                                                            
                                                             <td class="hidden-480">
                                                                 <s:property value="inventoryRef"/>
                                                             </td>
